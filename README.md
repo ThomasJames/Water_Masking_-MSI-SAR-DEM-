@@ -1,10 +1,14 @@
-# Water Masking 
+# Semantic Labelling
 
 Development of a sophisticated urban water masking algorithm.
 
-A hybrid algorithm using Synthetic Apeture Radar (SAR), Multispectral (MSI) and Digitial Elevation models (DEM). 
-
-With the purpose of labelling truecolor imagery for training a convolutional neural network (CNN).
+```
+WI = ((i * ((SWIR2 - NIR) / (SWIR2 + NIR))) +
+      (j*((green - SWIR2) / (green + SWIR2))) +
+      (k * ((green - NIR) / (green + NIR)))) + (l * SAR)
+WI[WI > 0] = 1
+WI[WI < 0] = 0
+```
 
 
 ## Areas of interest 
@@ -13,3 +17,5 @@ With the purpose of labelling truecolor imagery for training a convolutional neu
 - New York 
 - Dhaka 
 - Rotterdam
+- Osaka
+- Buenos Aires
