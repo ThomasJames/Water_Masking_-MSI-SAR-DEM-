@@ -1,6 +1,12 @@
 import torch.nn as nn
 
 # No changes made from the initial architecture 
+"""
+Zeiler M.D., Fergus R. (2014) Visualizing and Understanding Convolutional Networks.
+In: Fleet D., Pajdla T., Schiele B., Tuytelaars T. (eds) Computer Vision – ECCV 2014. ECCV 2014. 
+Lecture Notes in Computer Science, vol 8689. Springer, Cham
+"""
+
 
 class ZFNet(nn.Module):
 
