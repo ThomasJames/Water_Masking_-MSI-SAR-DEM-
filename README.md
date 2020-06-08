@@ -22,7 +22,7 @@ WI[WI < 0] = 0
 ```
 
 
-## Areas of interest 
+## Regions 
 
 - Shanghai 
 - New York 
