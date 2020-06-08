@@ -1,6 +1,7 @@
 # Data
 
-Development of a sophisticated urban water masking algorithm.
+Urban Water masking
+Labelling achieved using this algorithm:
 
 ```
 # Parameter adjustments 
@@ -29,10 +30,8 @@ WI[WI < 0] = 0
 - Rotterdam
 - Osaka
 - Buenos Aires
-
-### Additional Data
-- Canada (Rural lakes)
-
-
-
-
+- Marseille 
+- Cornwall
+- Colombo 
+- Hiroshma 
+- Canada (for Rural lakes)
