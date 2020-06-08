@@ -16,6 +16,8 @@ IMG_URL = 'https://i2-prod.mirror.co.uk/incoming/article21957712.ece/ALTERNATES/
 # Class labels used when training VGG as json, courtesy of the 'Example code' link above.
 LABELS_URL = 'https://s3.amazonaws.com/outcome-blog/imagenet/labels.json'
 
+WI_lables = "{0: \"Land\", 1: \"Water\"}"
+
 # Let's get our class labels.
 response = requests.get(LABELS_URL)  # Make an HTTP GET request and store the response.
 labels = {int(key): value for key, value in response.json().items()}
