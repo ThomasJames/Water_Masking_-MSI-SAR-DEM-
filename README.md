@@ -4,21 +4,23 @@ Urban Water masking
 Labelling achieved using this algorithm:
 
 ```
-# Parameter adjustments 
-i = input("i: ")
-j = input("i: ")
-k = input("i: ")
-l = input("i: ")
+def WI(MSI, i=1, j=1, k=1):
 
-# Apply Water separation index
-WI = ((i * ((SWIR2 - NIR) / (SWIR2 + NIR))) +
-      (j*((green - SWIR2) / (green + SWIR2))) +
-      (k * ((green - NIR) / (green + NIR)))) + 
-      (l * SAR)
-      
-# Interpolate      
-WI[WI > 0] = 1
-WI[WI < 0] = 0
+    # Extract MSI bands
+    blue = MSI[-1][:, :, 1]
+    green = MSI[-1][:, :, 2]
+    red = MSI[-1][:, :, 3]
+    NIR = MSI[-1][:, :, 7]
+    SWIR1 = MSI[-1][:, :, 10]
+    SWIR2 = MSI[-1][:, :, 11]
+
+    # 
+    WI = ((i * ((SWIR2 - NIR) / (SWIR2 + NIR))) +
+          (j * ((green - SWIR2) / (green + SWIR2))) +
+          (k * ((blue - NIR) / (blue + NIR)))) + l * SAR
+    WI[WI > 0] = 1
+    WI[WI < 0] = 0
+    return WI
 ```
 
 
