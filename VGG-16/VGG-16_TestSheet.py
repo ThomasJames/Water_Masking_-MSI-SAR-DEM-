@@ -11,20 +11,30 @@ from torch.autograd import Variable
 import torchvision.models as models
 import torchvision.transforms as transforms
 
+
 # Random cat img taken from Google
-IMG_URL = 'https://i2-prod.mirror.co.uk/incoming/article21957712.ece/ALTERNATES/s615b/0_Labrador-Retrievers-fur-has-changed-from-black-to-white-and-people-are-mesmerised.jpg'
-# Class labels used when training VGG as json, courtesy of the 'Example code' link above.
+IMG_URL = 'https://www3.pictures.zimbio.com/gi/Marina+Traenkel+Arrivals+Mercedes+Benz+Fashion+-DVuoQPSYVwl.jpg'
+# Class mask used when training VGG as json, courtesy of the 'Example code' link above.
 LABELS_URL = 'https://s3.amazonaws.com/outcome-blog/imagenet/labels.json'
 
 WI_lables = "{0: \"Land\", 1: \"Water\"}"
 
-# Let's get our class labels.
+# Let's get our class mask.
 response = requests.get(LABELS_URL)  # Make an HTTP GET request and store the response.
 labels = {int(key): value for key, value in response.json().items()}
 
 # Let's get the cat img.
 response = requests.get(IMG_URL)
 img = Image.open(io.BytesIO(response.content))  # Read bytes and store as an img.
+
+import numpy as np
+a = np.asarray(img)
+print(f"Height (pixels): {a.shape[0]}   Width (pixels): {a.shape[1]}")
+
+import matplotlib.pyplot as plt
+plt.imshow(a)
+plt.show()
+
 
 # We can do all this preprocessing using a transform pipeline.
 min_img_size = 224  # The min size, as noted in the PyTorch pretrained models doc, is 224 px.
@@ -44,6 +54,6 @@ img = img.unsqueeze(0)  # Insert the new axis at index 0 i.e. in front of the ot
 img = Variable(img)
 
 vgg = models.vgg16(pretrained=True)  # This may take a few minutes.
-prediction = vgg(img)  # Returns a Tensor of shape (batch, num class labels)
+prediction = vgg(img)  # Returns a Tensor of shape (batch, num class mask)
 prediction = prediction.data.numpy().argmax()  # Our prediction will be the index of the class images with the largest value.
-print("Models predicts: ", labels[prediction])  # Converts the index to a string using our labels dict
+print("Models predicts: ", labels[prediction])  # Converts the index to a string using our mask dict

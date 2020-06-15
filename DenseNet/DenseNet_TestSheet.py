@@ -14,10 +14,10 @@ DenseNet = models.DenseNet()  # This may take a few minutes.
 
 # Random cat img taken from Google
 IMG_URL = 'https://images.pexels.com/photos/104827/cat-pet-animal-domestic-104827.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940'
-# Class labels used when training VGG as json, courtesy of the 'Example code' link above.
+# Class mask used when training VGG as json, courtesy of the 'Example code' link above.
 LABELS_URL = 'https://s3.amazonaws.com/outcome-blog/imagenet/labels.json'
 
-# Let's get our class labels for the output.
+# Let's get our class mask for the output.
 response = requests.get(LABELS_URL)  # Make an HTTP GET request and store the response.
 labels = {int(key): value for key, value in response.json().items()}
 
@@ -42,6 +42,6 @@ img = img.unsqueeze(0)  # Insert the new axis at index 0 i.e. in front of the ot
 img = Variable(img)
 
 
-prediction = DenseNet(img)  # Returns a Tensor of shape (batch, num class labels)
+prediction = DenseNet(img)  # Returns a Tensor of shape (batch, num class mask)
 prediction = prediction.data.numpy().argmax()  # Our prediction will be the index of the class images with the largest value.
-print("Models predicts: ", labels[prediction])  # Converts the index to a string using our labels dict
+print("Models predicts: ", labels[prediction])  # Converts the index to a string using our mask dict
