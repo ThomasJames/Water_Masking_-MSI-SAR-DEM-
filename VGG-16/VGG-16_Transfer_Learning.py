@@ -9,11 +9,12 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader
 import torchvision.transforms as transforms
 import numpy
-
-
 torch.manual_seed(0)
 torch.backends.cudnn.deterministic = True
 torch.backends.cudnn.benchmark = False
+from torch.utils.data import Dataset
+
+
 
 # Confirm access to a cpu or a gpu
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -32,14 +33,16 @@ transform = transforms.Compose([
 
 # Load in the data
 
-trainset = "data/test_set"
+trainset = "data/test_set/images"
 testset = "data/train_set"
 
-print(len(trainset))
+print(len(testset))
 
 
 trainloader = DataLoader(trainset, batch_size=98, shuffle=True)
 testloader = DataLoader(trainset, batch_size=98, shuffle=True)
+
+print(len(trainloader))
 
 for images, labels in trainloader:
     print(images.size(), labels.size())
