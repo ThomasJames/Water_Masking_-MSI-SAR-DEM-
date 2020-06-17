@@ -178,7 +178,7 @@ def get_dataloader_sep_folder(data_dir, imageFolder='Image', maskFolder='Mask', 
     return dataloaders
 
 
-def get_dataloader_single_folder(data_dir, imageFolder='Image', maskFolder='Masks', fraction=0.2, batch_size=4):
+def get_dataloader_single_folder(data_dir, imageFolder='Image', maskFolder='Mask', fraction=0.2, batch_size=4):
     """
         Create training and testing dataloaders from a single folder.
     """
@@ -210,7 +210,7 @@ class SegDataset(Dataset):
             -----Mask 1
             -----Mask N
             imageFolder (string) = 'Image' : Name of the folder which contains the Image.
-            maskFolder (string)  = 'Masks : Name of the folder which contains the Masks.
+            maskFolder (string)  = 'Mask : Name of the folder which contains the Mask.
             transform (callable, optional): Optional transform to be applied on a sample.
             seed: Specify a seed for the train and test split
             fraction: A float value from 0 to 1 which specifies the validation split fraction
@@ -443,7 +443,7 @@ if __name__ == "__main__":
     plt.imshow(data['image'][0]) # Just one band
     plt.show()
 
-    data_loader = get_dataloader_sep_folder(data_dir, imageFolder='Image', maskFolder='Masks', batch_size=11)
+    data_loader = get_dataloader_sep_folder(data_dir, imageFolder='Image', maskFolder='Mask', batch_size=11)
 
     model = createDeepLabv3()
 
